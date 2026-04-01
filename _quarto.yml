@@ -1,0 +1,38 @@
+project:
+  type: website
+
+website:
+  title: "introduction à git et gitlab"
+  sidebar:
+    left:
+    search: true
+    contents:
+      - index.qmd
+      - chap1_visite_rapide_gitlab.qmd
+      - chap2_presentation_generale_git.qmd
+      - chap3_git_vscodium.qmd
+      - chap4_git_rstudio.qmd
+      - chap5_commandes_base_git.qmd
+      - chap6_proposer_amélioration.qmd
+      - chap7_publier_page.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    from: markdown+emoji
+    code-tools: true
+    code-overflow: wrap
+    css: styles.css
+    toc: true
+  
+
+glossary:
+  path: glossary.yml
+  popup: hover
+  show: true
+    
+bibliography: biblio/biblio.bib
+csl: biblio/nature.csl
+

@@ -1,0 +1,30 @@
+# charger et télécharger des fichiers depuis la forge 
+
+Pour rappel, un {{< glossary remote >}} est un dépôt git distant (assez souvent mais pas exclusivement présent dans une forge)
+
+## télécharger le contenu d'un remote depuis une forge
+
+Cloner le contenu du {{< glossary repomote >}} correspondant au support de cette séance
+
+```bash
+git clone https://gitlab.huma-num.fr/dbelveze/introduction-git-et-gitlab.git
+```
+
+aller dans le répertoire, avec la commande ``git blame``, indiquez quand la ligne 35 du présent fichier (*presentation.qmd*) a été modifiée la dernière fois et par qui et quel message accompagnait le {{< glossary commit >}} ? 
+
+## 5. Charger des fichiers vers un remote dans une forge
+
+1. Aller sur la forge (framagit ou gitlab-humanum) pour laquelle on dispose d'un accès (Rappel : cet accès a été créé (framagit) ou demandé (gitlab-humanum) en amont de la séance)  
+2. créer un projet personnel   
+3. récupérer le lien (https//framagit) vers le projet revenir en local dans le répertoire de travail passer les commnandes suivantes dans le terminal
+
+```bash
+git remote add origin <URL du dépôt> # fait le lien avec le remote
+git branch -M main # assimile le dépôt à la branche main
+git push -uf origin main # pousse les documents vers la branche main du remote
+```
+ou bien utiliser votre éditeur pour faire le lien entre vos fichiers en local et ce {{< glossary remote >}}. 
+
+le lien entre le répertoire local et la forge va s'établir. 
+
+4. Rafraîchir la page d'accueil du répertoire sur la forge : les fichiers créés en local vont apparaître dans la page d'accueil du projet.

@@ -1,0 +1,74 @@
+branch: |
+  Variante d'un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée 'main')
+
+clone: |
+  Copie locale d'un repository existant en ligne sur une forge (voir repository ; avec git, on réalise un clone au moyen de la commande ``git clone``
+
+code_source: |
+  Texte qui présente les instructions composant un programme sous une forme lisible, telles qu'elles ont été écrites dans un langage de programmation
+
+commit: |
+  L'enregistrement d'un repository ou d'une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l'arbre de travail (l'historique de Git) et dispose d'un message et d'une signature unique (hash)
+
+forge: |
+  Plateforme web de travail collaboratif destinée à développer et partager des applications informatiques
+
+fork: |
+  Un fork se fait à partir de la forge : il s'agit de faire une copie à l'identique d'un repository présent sur une forge qui partagera à la base le même historique. Mais la copie aura une vie semi-indépendante. le fork pourra accepter des modifications spécifiques (par exemple par un autre auteur que l'auteurou l'autrice du repository initial) ; l'auteur ou l'autrice du fork pourra décider de proposer sa version à fusionner avec le repository initial (merge request) ou bien développer à part son propre projet, en coupant le lien avec le repository d'origine.
+
+git: |
+  Git est un logiciel libre et gratuit de gestion de versions décentralisé
+
+GitHub: |
+  GitHub est un service web d'hébergement et de gestion de développement de logiciels, utilisant le logiciel de gestion de versions Git. Acquis par Microsoft en 2018.
+
+GitLab: |
+  GitLab est un logiciel libre de forge basé sur Git proposant les fonctionnalités de wiki, un système de suivi des bugs, l’intégration continue et la livraison continue
+
+hash: |
+  Autrement appelé "somme de contrôle". Signature cryptographique constituée de 40 catactères hexadécimaux (de a à f et de 0 à 9). Cette somme identifie de manière permanente chaque commit singulier. Elle peut se présenter sous une forme abrégée en plusieurs endroits par souci de clarté, notamment quand on lance la commande ``git log --oneline``
+
+HTTPS: |  
+  L'Hypertext Transfer Protocol Secure (protocole de transfert hypertextuel sécurisé) garantit théoriquement la confidentialité et l'intégrité des données envoyées par l'utilisateur (notamment des informations entrées dans les formulaires) et reçues du serveur.
+
+index: |
+  L'index qu'on désigne aussi comme le cache de git (en anglais cache ou *staging area*) est un répertoire au départ vide dans lequel, on moyen de la commande git add on va ajouter des fichiers et les versions successives de ces fichiers. Une fois que l'index contient toutes les modifications qu'on souhaite, on peut les regrouper pour en faire le prochain *commit* avec la commande git commit. 
+
+jobs: |
+  Un job est une tâche définie dans un pipeline ; dans un processus d'intégration continue les *jobs* exécutés par les *runners* peuvent se succéder
+
+logiciel_libre: |
+  Logiciel dont l'utilisation, l'étude, la modification et la duplication par autrui en vue de sa diffusion sont permises, techniquement et juridiquement
+
+merge: |
+  Fusion de deux branches ou bien d'un repository avec son fork (``git merge``)
+
+pipeline: |
+  Ensemble d'instructions mises à disposition d'un runner pour déployer, compiler ou tester un projet. Cet ensemble d'instructions figurent dans un fichier .gitlab_ci.yml ou ci signifie "Continuous Integration", c'est à dire "intégration continue" de nouveaux éléments au code. 
+
+pull: |
+  Ne pas confondre avec **clone** ; ``git pull`` permet de récupérer en local sur sa machine des modifications qui ont été faites directement dans la forge ou bien qui ont été envoyées ('push') par des collaborateurs vers la forge. ``git clone`` récupère tout le contenu d'un repository pour créer une copie locale, ``git pull`` ne récupère que les modifications (ajouts, suppressions dans les fichiers), c'est à dire le delta entre les deux versions, celle qui est en ligne, et celle antérieure qui est en local.   
+
+push: |
+  Envoi d'un commit d'un repository local vers son équivalent en ligne. Le push porte sur une branche donnée ; par défaut, en l'absence d'autres branches, le push s'exerce sur la branche dite principale ('main')
+
+README: |
+  Un fichier readme (en français, lisez-moi) est un fichier contenant des informations sur les autres fichiers du même répertoire. 
+
+remote: |
+  Un remote est un repository distant, conservé sur un serveur ou dans une forge par exemple. Git clone/pull/push sont des commandes qui permettent de faire communiquer le remote avec le dépôt local (ou *repository*)
+
+repository: |
+  Un repository ou dépôt est un dossier comportant un dispositif de versionage (pour Git, ce dispositif de versionage est majoritairement présent dans le sous-dossier .git)
+
+runner: |
+  Un runner est un programme lié à une forge qui permet d'exécuter au sein de cette forge des programmes d'intégration continue (déploiement de pages, compilation de documents, tests unitaires, etc.) Chaque forge vient avec ses runners partagés utilisables par défaut. On peut ajouter d'autres runners auxquels on a accès, par exemple, si on essaie de traiter un jeu de données volumineux au moyen d'un code source.
+
+ssh: |
+  Protocole de communication sécurisé passant par un système de chiffrement asymétrique ; pour accéder en écriture à un remote, il faut que sa clé publique soit chargée dans la forge et que la clé privée relative à cette clé publique soit présente sur l'ordinateur qui tente la connexion. 
+
+staged: |
+  Se dit d'une modification d'un fichier qui est prête à intégrer un commit. Tant qu'un fichier n'est pas 'staged', il apparaîtra en rouge lorsqu'on passera la commande ``git status`` ; pour que les fichiers avec leurs modifs soient prises en compte, il faut les sélectionner dans l'interface graphique de R ou bien les ajouter avec la commande ``git add``
+
+VSCodium: |
+  VSCodium est un editeur de code extensible. VSCodium est une version de VSCode sans télémétrie et distribuée avec une licence libre (MIT) qui est bien plus respectueuse.  

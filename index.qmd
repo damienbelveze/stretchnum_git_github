@@ -1,0 +1,40 @@
+---
+title: "découvrir Git et la forge Gitlab"
+subtitle: Formation doctorale du Collège Doctoral de Bretagne
+date: "6 mars 2026"
+author: 
+    - name: Damien Belvèze
+      email: damien.belveze@univ-rennes.fr
+      affiliation: 
+        - name: Université de Rennes
+    - name: Kilian Heutte
+      email: kilian.heutte@univ-rennes2.fr
+      affiliation: 
+        - name: Université Rennes 2
+output: 
+  html:
+    from: markdown+emoji
+    code-tools: true
+    code-overflow: wrap
+
+glossary:
+  path: glossary.yml
+  popup: hover
+  show: true
+    
+bibliography: biblio/biblio.bib
+csl: biblio/nature.csl
+---
+
+![Plan de métro ou gestion confuse d'un projet git ?](images/plan_metro.jpg)
+
+Cette formation de 3 heures est destinée aux doctorant.e.s du Collège doctoral de Bretagne
+
+Objectifs de la séance : 
+
+- Connaître le rôle de git et gitlab dans l'écosystème de la recherche et de la production de code source de recherche  
+- utiliser git pour versionner un texte ou un code source  
+- connaître les principales fonctionnalités des forges  
+- utiliser une forge pour collaborer avec d'autres chercheurs et chercheuses  
+
+
