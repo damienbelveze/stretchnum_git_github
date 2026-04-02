@@ -1,31 +1,11 @@
-name: Deploy Quarto Website
-
-on:
-  push:
-    branches: [ main ]  # Change this to your default branch if different
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: _site/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
+pages:
+  stage: deploy
+  script:
+    - mkdir .public
+    - cp -r _site/* .public/  # Copy only the contents of _site, not the folder itself
+    - mv .public public
+  artifacts:
+    paths:
+      - public/  # Serve the entire public directory as root
+  only:
+    - main
