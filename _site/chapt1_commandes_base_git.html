@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>chapt1_commandes_base_git – introduction à git et gitlab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-36d96af684d0f4735c10f96dc2327708.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/glossary/glossary.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      introduction à git et gitlab
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">introduction à git et gitlab</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">découvrir Git et la forge Gitlab</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+ <span class="menu-text">chap1_commandes_base_git.qmd</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap2_cle_ssh.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Accèder à la forge avec le protocole ssh</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+ <span class="menu-text">chap3_envoi_vers_forge.qmd</span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#utiliser-git-avec-le-terminal" id="toc-utiliser-git-avec-le-terminal" class="nav-link active" data-scroll-target="#utiliser-git-avec-le-terminal">5. Utiliser Git avec le terminal</a>
+  <ul class="collapse">
+  <li><a href="#ouvrir-le-terminal" id="toc-ouvrir-le-terminal" class="nav-link" data-scroll-target="#ouvrir-le-terminal">Ouvrir le terminal</a></li>
+  <li><a href="#configurer-git" id="toc-configurer-git" class="nav-link" data-scroll-target="#configurer-git">configurer Git</a></li>
+  <li><a href="#init-add-commit-status" id="toc-init-add-commit-status" class="nav-link" data-scroll-target="#init-add-commit-status">init, add, commit, status</a></li>
+  <li><a href="#init-add-commit-status-1" id="toc-init-add-commit-status-1" class="nav-link" data-scroll-target="#init-add-commit-status-1">init, add, commit, status</a></li>
+  <li><a href="#status-log-blame" id="toc-status-log-blame" class="nav-link" data-scroll-target="#status-log-blame">status, log, blame</a></li>
+  <li><a href="#gérer-le-roll-back-avec-revert" id="toc-gérer-le-roll-back-avec-revert" class="nav-link" data-scroll-target="#gérer-le-roll-back-avec-revert">gérer le roll-back avec revert</a></li>
+  <li><a href="#créer-et-gérer-des-branches" id="toc-créer-et-gérer-des-branches" class="nav-link" data-scroll-target="#créer-et-gérer-des-branches">créer et gérer des branches</a></li>
+  <li><a href="#fusionner-des-branches" id="toc-fusionner-des-branches" class="nav-link" data-scroll-target="#fusionner-des-branches">fusionner des branches</a></li>
+  <li><a href="#faisons-le-point" id="toc-faisons-le-point" class="nav-link" data-scroll-target="#faisons-le-point">faisons le point</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+
+
+
+
+<section id="utiliser-git-avec-le-terminal" class="level1">
+<h1>5. Utiliser Git avec le terminal</h1>
+<p>Git dispose d’une interface graphique, <button class="glossary" title="">git desktop</button>. De plus, plusieurs environnements de travail intègrent Git dont <button class="glossary" title="VSCodium est un editeur de code extensible. VSCodium est une version de VSCode sans télémétrie et distribuée avec une licence libre (MIT) qui est bien plus respectueuse.">VSCodium</button> et Rstudio.</p>
+<p>La majorité des utilisateurs et utilisatrices utilisent Git avec leur terminal de commandes. Il existe une grande variété de terminaux qui permettent d’accéder directement au shell de l’ordinateur et de lui envoyer des instructions avec des lignes de commande sans passer par une interface graphique.</p>
+<section id="ouvrir-le-terminal" class="level2">
+<h2 class="anchored" data-anchor-id="ouvrir-le-terminal">Ouvrir le terminal</h2>
+<ul>
+<li>Windows 10+ : shift + clic droit, dans le menu, choisir “ouvrir la fenêtre powershell” ou bien entrer “cmd” dans le menu démarrer.</li>
+<li>GNU/Linux : Ctrl + Alt + T<br>
+</li>
+<li>MacOs : Cliquez sur l’icône Launchpad dans le Dock, saisissez Terminal dans le champ de recherche, puis cliquez sur Terminal.</li>
+</ul>
+<p>Dans les manuels, le signe $ en début de ligne indique qu’une commande doit être réalisée dans le terminal de commandes (il ne fait pas partie de la commande à copier/coller)</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>copier / coller depuis / vers un terminal
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ctrl + C et Ctrl + V ne suffisent pas pour copier ou coller dans un terminal par défaut. Il faut ajouter la touche shift (Ctrl + shift + C ou Ctrl + shift + V) ou ⌘ + shift + C ou V pour MacOs</p>
+<p>Pour récupérer la commande précédente, utiliser la flèche vers le haut</p>
+</div>
+</div>
+</section>
+<section id="configurer-git" class="level2">
+<h2 class="anchored" data-anchor-id="configurer-git">configurer Git</h2>
+<p>Lorsqu’on initie un dépôt (ou [<span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="glossary" data-raw="glossary"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="repository" data-raw="repository"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-raw="add_to_table=true>}})" data-key="add_to_table" data-value="true>}})"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ouvre" data-raw="ouvre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> [<span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="glossary" data-raw="glossary"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="index" data-raw="index"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-raw="add_to_table=true>}}" data-key="add_to_table" data-value="true>}}"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qui" data-raw="qui"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="au" data-raw="au"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="départ" data-raw="départ"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="être" data-raw="être"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="vide." data-raw="vide."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="On" data-raw="On"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="enregistrer" data-raw="enregistrer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="cet" data-raw="cet"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="index" data-raw="index"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichiers" data-raw="fichiers"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="soumis" data-raw="soumis"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="au" data-raw="au"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="contrôle" data-raw="contrôle"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="versions" data-raw="versions"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ainsi" data-raw="ainsi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="que" data-raw="que"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="opérations" data-raw="opérations"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="réalisées" data-raw="réalisées"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sur" data-raw="sur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ces" data-raw="ces"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichiers." data-raw="fichiers."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Dans" data-raw="Dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="premier" data-raw="premier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="temps," data-raw="temps,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="utiliser" data-raw="utiliser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="indépendamment" data-raw="indépendamment"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="forge" data-raw="forge"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Lorsqu'on" data-raw="Lorsqu'on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="télécharge" data-raw="télécharge"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pour" data-raw="pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Windows," data-raw="Windows,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'installateur" data-raw="l'installateur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="nous" data-raw="nous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pose" data-raw="pose"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="certain" data-raw="certain"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="nombre" data-raw="nombre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="questions" data-raw="questions"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="auxquelles" data-raw="auxquelles"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ne" data-raw="ne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="saura" data-raw="saura"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="forcément" data-raw="forcément"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="bien" data-raw="bien"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="répondre" data-raw="répondre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="première" data-raw="première"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fois," data-raw="fois,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ce" data-raw="ce"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="n'est" data-raw="n'est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="grave," data-raw="grave,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="peut" data-raw="peut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="toujours" data-raw="toujours"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="changer" data-raw="changer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ces" data-raw="ces"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="paramètres" data-raw="paramètres"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="après" data-raw="après"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sans" data-raw="sans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avoir" data-raw="avoir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="tout" data-raw="tout"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="réinstaller." data-raw="réinstaller."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Dans" data-raw="Dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="perspective" data-raw="perspective"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'une" data-raw="d'une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="collaboration" data-raw="collaboration"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'autres" data-raw="d'autres"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="personnes," data-raw="personnes,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="il" data-raw="il"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="est" data-raw="est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="important" data-raw="important"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="signer" data-raw="signer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="révisions" data-raw="révisions"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="et" data-raw="et"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ajouts" data-raw="ajouts"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qu'on" data-raw="qu'on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fait" data-raw="fait"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="et" data-raw="et"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pour" data-raw="pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="cela" data-raw="cela"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="il" data-raw="il"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="faut" data-raw="faut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fois" data-raw="fois"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pour" data-raw="pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="toutes" data-raw="toutes"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="donner" data-raw="donner"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="informations" data-raw="informations"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sur" data-raw="sur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="soi" data-raw="soi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'application" data-raw="l'application"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```shell" data-raw="```shell"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="config" data-raw="config"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="--global" data-raw="--global"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="user.name" data-raw="user.name"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Damien Belvèze" data-raw="&quot;Damien Belvèze&quot;"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="config" data-raw="config"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="--global" data-raw="--global"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="user.email" data-raw="user.email"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="damien.belveze@univ-rennes.fr" data-raw="&quot;damien.belveze@univ-rennes.fr&quot;"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Une" data-raw="Une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="c'est" data-raw="c'est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="trois" data-raw="trois"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="choses" data-raw="choses"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="référence" data-raw="référence"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="au" data-raw="au"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**programme" data-raw="**programme"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git**" data-raw="git**"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="+" data-raw="+"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**verbe**" data-raw="**verbe**"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="+" data-raw="+"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**option**" data-raw="**option**"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=";" data-raw=";"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ici" data-raw="ici"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="a" data-raw="a"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="bien" data-raw="bien"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="+" data-raw="+"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="config" data-raw="config"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(le" data-raw="(le"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="verbe)" data-raw="verbe)"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="+" data-raw="+"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="option" data-raw="option"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="--global" data-raw="--global"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**--global**" data-raw="**--global**"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="signifie" data-raw="signifie"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="que" data-raw="que"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ce" data-raw="ce"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="nom" data-raw="nom"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="et" data-raw="et"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ce" data-raw="ce"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="mail" data-raw="mail"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="seront" data-raw="seront"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="attribués" data-raw="attribués"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'ensemble" data-raw="l'ensemble"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="révisions" data-raw="révisions"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="réalisées" data-raw="réalisées"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="et" data-raw="et"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="seulement" data-raw="seulement"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="révisions" data-raw="révisions"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="liées" data-raw="liées"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="projet" data-raw="projet"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="en" data-raw="en"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="particulier." data-raw="particulier."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="nécessite" data-raw="nécessite"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="parfois" data-raw="parfois"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'ouverture" data-raw="l'ouverture"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'un" data-raw="d'un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="éditeur" data-raw="éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pour" data-raw="pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="écrire" data-raw="écrire"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="messages" data-raw="messages"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="permettant" data-raw="permettant"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="donner" data-raw="donner"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="du" data-raw="du"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sens" data-raw="sens"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="certaines" data-raw="certaines"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="actions" data-raw="actions"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(une" data-raw="(une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="révision" data-raw="révision"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ou" data-raw="ou"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="*commit*," data-raw="*commit*,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fusion" data-raw="fusion"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ou" data-raw="ou"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="*merge*)" data-raw="*merge*)"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="L'installateur" data-raw="L'installateur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Windows" data-raw="Windows"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="demande" data-raw="demande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="quel" data-raw="quel"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="éditeur" data-raw="éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="doit" data-raw="doit"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="utiliser" data-raw="utiliser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=";" data-raw=";"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pour" data-raw="pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="raisons" data-raw="raisons"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="simplicité" data-raw="simplicité"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="peut" data-raw="peut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="choisir" data-raw="choisir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'éditeur" data-raw="l'éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Notepad" data-raw="Notepad"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qui" data-raw="qui"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="est" data-raw="est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="par" data-raw="par"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="défaut" data-raw="défaut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="présent" data-raw="présent"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Windows" data-raw="Windows"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="+10" data-raw="+10"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="On" data-raw="On"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="peut" data-raw="peut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="aussi" data-raw="aussi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="changer" data-raw="changer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'éditeur" data-raw="d'éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ligne" data-raw="ligne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```shell" data-raw="```shell"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="config" data-raw="config"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="--global" data-raw="--global"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="core.editor" data-raw="core.editor"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="notepad -w" data-raw="&quot;notepad -w&quot;"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ou" data-raw="ou"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="config" data-raw="config"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="--global" data-raw="--global"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="core.editor" data-raw="core.editor"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="notepad --wait" data-raw="&quot;notepad --wait&quot;"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Dans" data-raw="Dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commandes" data-raw="commandes"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ci-dessus" data-raw="ci-dessus"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="demande" data-raw="demande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Git" data-raw="Git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'ouvrir" data-raw="d'ouvrir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'éditeur" data-raw="l'éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="notepad" data-raw="notepad"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(par" data-raw="(par"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="défaut" data-raw="défaut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sur" data-raw="sur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ordinateurs" data-raw="ordinateurs"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Windows)" data-raw="Windows)"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dès" data-raw="dès"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qu'il" data-raw="qu'il"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="doit" data-raw="doit"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ouvrir" data-raw="ouvrir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="éditeur" data-raw="éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=";" data-raw=";"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="c'est" data-raw="c'est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="préférable" data-raw="préférable"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="au" data-raw="au"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fait" data-raw="fait"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="le" data-raw="le"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="laisser" data-raw="laisser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ouvrir" data-raw="ouvrir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="son" data-raw="son"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="éditeur" data-raw="éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="référence" data-raw="référence"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qui" data-raw="qui"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="est" data-raw="est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Vi" data-raw="Vi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="si" data-raw="si"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ne" data-raw="ne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="connaît" data-raw="connaît"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Vi" data-raw="Vi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="et" data-raw="et"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ses" data-raw="ses"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="raccourcis." data-raw="raccourcis."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="##" data-raw="##"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="init," data-raw="init,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="add," data-raw="add,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commit," data-raw="commit,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="status" data-raw="status"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**initier" data-raw="**initier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dépôt" data-raw="dépôt"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git**" data-raw="git**"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="créer" data-raw="créer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dossier" data-raw="dossier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="initialiser" data-raw="initialiser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="repository" data-raw="repository"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="en" data-raw="en"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="entrant" data-raw="entrant"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="suivante" data-raw="suivante"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="votre" data-raw="votre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="terminal" data-raw="terminal"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```bash" data-raw="```bash"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="init" data-raw="init"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**créer" data-raw="**créer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="principale**" data-raw="principale**"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Cette" data-raw="Cette"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="opération" data-raw="opération"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="est" data-raw="est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="superflue" data-raw="superflue"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="tant" data-raw="tant"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qu'on" data-raw="qu'on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ne" data-raw="ne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="crée" data-raw="crée"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="plus" data-raw="plus"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'une" data-raw="d'une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="mais" data-raw="mais"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="elle" data-raw="elle"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="peut" data-raw="peut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="s'avérer" data-raw="s'avérer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="utile" data-raw="utile"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'autres" data-raw="d'autres"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="cas." data-raw="cas."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Une" data-raw="Une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="est" data-raw="est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="comme" data-raw="comme"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="version" data-raw="version"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="du" data-raw="du"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dépôt" data-raw="dépôt"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="elle" data-raw="elle"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="peut" data-raw="peut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="coexister" data-raw="coexister"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="autre" data-raw="autre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche," data-raw="branche,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="c'est" data-raw="c'est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dire" data-raw="dire"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="autre" data-raw="autre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="version." data-raw="version."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="D'une" data-raw="D'une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'autre," data-raw="l'autre,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'état" data-raw="l'état"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="des" data-raw="des"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichiers" data-raw="fichiers"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ne" data-raw="ne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sera" data-raw="sera"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="le" data-raw="le"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="même," data-raw="même,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichiers" data-raw="fichiers"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="eux-mêmes" data-raw="eux-mêmes"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ne" data-raw="ne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pourront" data-raw="pourront"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="être" data-raw="être"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="mêmes." data-raw="mêmes."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="C'est" data-raw="C'est"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ainsi" data-raw="ainsi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="que" data-raw="que"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="vous" data-raw="vous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pouvez" data-raw="pouvez"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="faire" data-raw="faire"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avancer" data-raw="avancer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="seul.e" data-raw="seul.e"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ou" data-raw="ou"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'autres" data-raw="d'autres"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="utilisateurices," data-raw="utilisateurices,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="plusieurs" data-raw="plusieurs"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="états" data-raw="états"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'un" data-raw="d'un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="même" data-raw="même"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="travail," data-raw="travail,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avant" data-raw="avant"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fusionner" data-raw="fusionner"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ces" data-raw="ces"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="versions." data-raw="versions."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="On" data-raw="On"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="donc" data-raw="donc"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="créer" data-raw="créer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="principale" data-raw="principale"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avec" data-raw="avec"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```bash" data-raw="```bash"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="checkout" data-raw="checkout"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-b" data-raw="-b"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="main" data-raw="main"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="``checkout``" data-raw="``checkout``"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="permet" data-raw="permet"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="passer" data-raw="passer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'une" data-raw="d'une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'autre." data-raw="l'autre."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Par" data-raw="Par"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="exemple" data-raw="exemple"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="``git" data-raw="``git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="checkout" data-raw="checkout"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fleur``" data-raw="fleur``"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="permet" data-raw="permet"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="passer" data-raw="passer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sur" data-raw="sur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fleur." data-raw="fleur."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="L'argument" data-raw="L'argument"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-b" data-raw="-b"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="crée" data-raw="crée"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="si" data-raw="si"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="elle" data-raw="elle"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="n'existe" data-raw="n'existe"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="déjà." data-raw="déjà."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Chaque" data-raw="Chaque"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fois" data-raw="fois"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qu'on" data-raw="qu'on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="crée" data-raw="crée"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche," data-raw="branche,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="se" data-raw="se"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="situer" data-raw="situer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="cette" data-raw="cette"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="nouvelle" data-raw="nouvelle"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche." data-raw="branche."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="une" data-raw="une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fois" data-raw="fois"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qu'on" data-raw="qu'on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="a" data-raw="a"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="créé" data-raw="créé"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche" data-raw="branche"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="principale" data-raw="principale"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(appelée" data-raw="(appelée"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="par" data-raw="par"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="convention" data-raw="convention"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="main" data-raw="'main'"></span><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=")," data-raw="),"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ajouter" data-raw="ajouter"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier" data-raw="fichier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="cette" data-raw="cette"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="branche." data-raw="branche."></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Ouvrir" data-raw="Ouvrir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="éditeur" data-raw="éditeur"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="texte" data-raw="texte"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(notepad" data-raw="(notepad"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="par" data-raw="par"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="exemple)" data-raw="exemple)"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ce" data-raw="ce"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="nouveau" data-raw="nouveau"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier" data-raw="fichier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(recette.md)," data-raw="(recette.md),"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="inscrire" data-raw="inscrire"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ingrédients" data-raw="ingrédients"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="votre" data-raw="votre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="recette" data-raw="recette"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="préférée" data-raw="préférée"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sous" data-raw="sous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="forme" data-raw="forme"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'une" data-raw="d'une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="liste" data-raw="liste"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="puces" data-raw="puces"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```text" data-raw="```text"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="#" data-raw="#"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ma" data-raw="ma"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pizza" data-raw="pizza"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="préférée" data-raw="préférée"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pâte" data-raw="pâte"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="tomates" data-raw="tomates"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="séchées" data-raw="séchées"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="mozarella" data-raw="mozarella"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="lardons" data-raw="lardons"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-" data-raw="-"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="champignons" data-raw="champignons"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**enregistrer" data-raw="**enregistrer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="modifications" data-raw="modifications"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'" data-raw="l'"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="glossary" data-raw="glossary"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="index" data-raw="index"></span> ]{.quarto-shortcode__ data-is-shortcode=“1” data-raw=“{{&lt; glossary index add_to_table=true&gt;}} dans Git qui au départ va être vide. On va enregistrer dans cet index des fichiers soumis au contrôle de versions ainsi que des opérations réalisées sur ces fichiers.</p>
+<p>Dans un premier temps, on va utiliser git indépendamment de la forge</p>
+<p>Lorsqu’on télécharge Git pour Windows, l’installateur nous pose un certain nombre de questions auxquelles on ne saura pas forcément bien répondre la première fois, ce n’est pas grave, on peut toujours changer ces paramètres après sans avoir à tout réinstaller.</p>
+<p>Dans la perspective d’une collaboration avec d’autres personnes, il est important de signer les révisions et ajouts qu’on fait avec Git et pour cela il faut une fois pour toutes donner des informations sur soi à l’application :</p>
+<pre class="shell"><code>$ git config --global user.name \"Damien Belvèze\"
+$ git config --global user.email \"damien.belveze@univ-rennes.fr\"</code></pre>
+<p>Une commande git c’est trois choses :</p>
+<p>la référence au <strong>programme git</strong> + un <strong>verbe</strong> + une <strong>option</strong> ;</p>
+<p>ici on a bien git + config (le verbe) + une option –global</p>
+<p><strong>–global</strong> signifie que ce nom et ce mail seront attribués à l’ensemble des révisions réalisées avec Git et pas seulement les révisions liées à un projet en particulier.</p>
+<p>Git nécessite parfois l’ouverture d’un éditeur pour écrire des messages permettant de donner du sens à certaines actions (une révision ou <em>commit</em>, une fusion ou <em>merge</em>)</p>
+<p>L’installateur de Windows demande quel éditeur Git doit utiliser ; pour des raisons de simplicité on peut choisir l’éditeur Notepad qui est par défaut présent dans Windows +10</p>
+<p>On peut aussi changer d’éditeur avec une ligne de commande :</p>
+<pre class="shell"><code>$ git config --global core.editor \"notepad -w\" ou </code></pre>
+<pre><code>$ git config --global core.editor \"notepad --wait\"</code></pre>
+<p>Dans les commandes ci-dessus on demande à Git d’ouvrir l’éditeur notepad (par défaut sur les ordinateurs Windows) dès qu’il doit ouvrir un éditeur ; c’est préférable au fait de le laisser ouvrir son éditeur de référence qui est Vi si on ne connaît pas Vi et ses raccourcis.</p>
+</section>
+<section id="init-add-commit-status" class="level2">
+<h2 class="anchored" data-anchor-id="init-add-commit-status">init, add, commit, status</h2>
+<p><strong>initier un dépôt git</strong></p>
+<ul>
+<li>créer un dossier</li>
+<li>initialiser un repository git en entrant la commande suivante dans votre terminal</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>créer la branche principale</strong></p>
+<p>Cette opération est superflue tant qu’on ne crée pas plus d’une branche mais elle peut s’avérer utile dans d’autres cas.</p>
+<p>Une branche est comme une version du dépôt : elle peut coexister avec une autre branche, c’est à dire une autre version. D’une branche à l’autre, l’état des fichiers ne sera pas le même, les fichiers eux-mêmes ne pourront pas être les mêmes. C’est ainsi que vous pouvez faire avancer seul.e ou avec d’autres utilisateurices, plusieurs états d’un même travail, avant de fusionner ces versions.</p>
+<p>On va donc créer la branche principale avec la commande :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout <span class="at">-b</span> main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>la commande <code>checkout</code> permet de passer d’une branche à l’autre. Par exemple <code>git checkout fleur</code> permet de passer sur la branche fleur. L’argument -b crée la branche si elle n’existe pas déjà. Chaque fois qu’on crée une branche, on va se situer dans cette nouvelle branche.</p>
+<p>une fois qu’on a créé la branche principale (appelée par convention ‘main’), on va ajouter un fichier à cette branche.</p>
+<p>Ouvrir un éditeur de texte (notepad par exemple)</p>
+<p>dans ce nouveau fichier (recette.md), inscrire les ingrédients de votre recette préférée sous la forme d’une liste à puces</p>
+<pre class="text"><code># ma pizza préférée
+- pâte
+- tomates séchées
+- mozarella
+- lardons
+- champignons</code></pre>
+<p>**enregistrer les modifications dans l’{{&lt; glossary index &gt;}}“}<span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="**" data-raw="**"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Une" data-raw="Une"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fois" data-raw="fois"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ce" data-raw="ce"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier" data-raw="fichier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="enregistré," data-raw="enregistré,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'ajouter" data-raw="l'ajouter"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'index" data-raw="l'index"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```bash" data-raw="```bash"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="add" data-raw="add"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="<nom" data-raw="<nom"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="du" data-raw="du"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier>" data-raw="fichier>"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="La" data-raw="La"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="inverse" data-raw="inverse"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="consiste" data-raw="consiste"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="retirer" data-raw="retirer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'index" data-raw="l'index"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier." data-raw="fichier."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Pour" data-raw="Pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="cela" data-raw="cela"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="on" data-raw="on"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="va" data-raw="va"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="utiliser" data-raw="utiliser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="``git" data-raw="``git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="rm``" data-raw="rm``"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(*rm*" data-raw="(*rm*"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pour" data-raw="pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="remove)." data-raw="remove)."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Pour" data-raw="Pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="retirer" data-raw="retirer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichiers" data-raw="fichiers"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="et" data-raw="et"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sous-dossiers" data-raw="sous-dossiers"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="présents" data-raw="présents"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dossier" data-raw="dossier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ajeter" data-raw="&quot;ajeter&quot;"></span><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="," data-raw=","></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commande" data-raw="commande"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="passer" data-raw="passer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sera" data-raw="sera"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value=":" data-raw=":"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```bash" data-raw="```bash"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="$" data-raw="$"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="git" data-raw="git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="rm" data-raw="rm"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-rf" data-raw="-rf"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ajeter/*" data-raw="ajeter/*"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="#" data-raw="#"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="-rf" data-raw="-rf"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="permet" data-raw="permet"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="procéder" data-raw="procéder"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="manière" data-raw="manière"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="récursive" data-raw="récursive"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'opération" data-raw="l'opération"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sous-sous" data-raw="sous-sous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dossiers," data-raw="dossiers,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="etc." data-raw="etc."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="```" data-raw="```"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Ainsi" data-raw="Ainsi"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="si" data-raw="si"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="vous" data-raw="vous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="avez" data-raw="avez"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="supprimé" data-raw="supprimé"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier." data-raw="fichier."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Vous" data-raw="Vous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pouvez" data-raw="pouvez"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="le" data-raw="le"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="récupérer" data-raw="récupérer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="depuis" data-raw="depuis"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'arbre" data-raw="l'arbre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="travail," data-raw="travail,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="en" data-raw="en"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="revenant" data-raw="revenant"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="commit" data-raw="commit"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="d'avant" data-raw="d'avant"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="la" data-raw="la"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="suppression." data-raw="suppression."></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Pour" data-raw="Pour"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="le" data-raw="le"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="supprimer" data-raw="supprimer"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="définitivement" data-raw="définitivement"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'arbre" data-raw="l'arbre"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="travail," data-raw="travail,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="il" data-raw="il"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="faut" data-raw="faut"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="penser" data-raw="penser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="utiliser" data-raw="utiliser"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="``git" data-raw="``git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="rm``" data-raw="rm``"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="##" data-raw="##"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="status," data-raw="status,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="log," data-raw="log,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="blame" data-raw="blame"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="Dans" data-raw="Dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="le" data-raw="le"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichier" data-raw="fichier"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sa" data-raw="sa"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="recette" data-raw="recette"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="favorite," data-raw="favorite,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ajouter" data-raw="ajouter"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="un" data-raw="un"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="poison" data-raw="poison"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="(arsenic," data-raw="(arsenic,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="strychnine," data-raw="strychnine,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ritaline," data-raw="ritaline,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="curare," data-raw="curare,"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ce" data-raw="ce"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="que" data-raw="que"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="vous" data-raw="vous"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="voulez)" data-raw="voulez)"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="`git" data-raw="`git"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="status`" data-raw="status`"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="permet" data-raw="permet"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="de" data-raw="de"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="voir" data-raw="voir"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="les" data-raw="les"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="fichiers" data-raw="fichiers"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="qui" data-raw="qui"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ne" data-raw="ne"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="sont" data-raw="sont"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="pas" data-raw="pas"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="encore" data-raw="encore"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="dans" data-raw="dans"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'index" data-raw="l'index"></span></p>
+<p><span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="ajouter" data-raw="ajouter"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="à" data-raw="à"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="l'" data-raw="l'"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="glossary" data-raw="glossary"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-value="index" data-raw="index"></span> <span class="quarto-shortcode__-param" data-is-shortcode="1" data-raw="add_to_table=true" data-key="add_to_table" data-value="true"></span> ]{.quarto-shortcode__ data-is-shortcode=“1” data-raw=“{{&lt; glossary repository add_to_table=true&gt;}}) on ouvre un {{&lt; glossary index add_to_table=true&gt;}} dans Git qui au départ va être vide. On va enregistrer dans cet index des fichiers soumis au contrôle de versions ainsi que des opérations réalisées sur ces fichiers.</p>
+<p>Dans un premier temps, on va utiliser git indépendamment de la forge</p>
+<p>Lorsqu’on télécharge Git pour Windows, l’installateur nous pose un certain nombre de questions auxquelles on ne saura pas forcément bien répondre la première fois, ce n’est pas grave, on peut toujours changer ces paramètres après sans avoir à tout réinstaller.</p>
+<p>Dans la perspective d’une collaboration avec d’autres personnes, il est important de signer les révisions et ajouts qu’on fait avec Git et pour cela il faut une fois pour toutes donner des informations sur soi à l’application :</p>
+<pre class="shell"><code>$ git config --global user.name \"Damien Belvèze\"
+$ git config --global user.email \"damien.belveze@univ-rennes.fr\"</code></pre>
+<p>Une commande git c’est trois choses :</p>
+<p>la référence au <strong>programme git</strong> + un <strong>verbe</strong> + une <strong>option</strong> ;</p>
+<p>ici on a bien git + config (le verbe) + une option –global</p>
+<p><strong>–global</strong> signifie que ce nom et ce mail seront attribués à l’ensemble des révisions réalisées avec Git et pas seulement les révisions liées à un projet en particulier.</p>
+<p>Git nécessite parfois l’ouverture d’un éditeur pour écrire des messages permettant de donner du sens à certaines actions (une révision ou <em>commit</em>, une fusion ou <em>merge</em>)</p>
+<p>L’installateur de Windows demande quel éditeur Git doit utiliser ; pour des raisons de simplicité on peut choisir l’éditeur Notepad qui est par défaut présent dans Windows +10</p>
+<p>On peut aussi changer d’éditeur avec une ligne de commande :</p>
+<pre class="shell"><code>$ git config --global core.editor \"notepad -w\" ou </code></pre>
+<pre><code>$ git config --global core.editor \"notepad --wait\"</code></pre>
+<p>Dans les commandes ci-dessus on demande à Git d’ouvrir l’éditeur notepad (par défaut sur les ordinateurs Windows) dès qu’il doit ouvrir un éditeur ; c’est préférable au fait de le laisser ouvrir son éditeur de référence qui est Vi si on ne connaît pas Vi et ses raccourcis.</p>
+</section>
+<section id="init-add-commit-status-1" class="level2">
+<h2 class="anchored" data-anchor-id="init-add-commit-status-1">init, add, commit, status</h2>
+<p><strong>initier un dépôt git</strong></p>
+<ul>
+<li>créer un dossier</li>
+<li>initialiser un repository git en entrant la commande suivante dans votre terminal</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>créer la branche principale</strong></p>
+<p>Cette opération est superflue tant qu’on ne crée pas plus d’une branche mais elle peut s’avérer utile dans d’autres cas.</p>
+<p>Une branche est comme une version du dépôt : elle peut coexister avec une autre branche, c’est à dire une autre version. D’une branche à l’autre, l’état des fichiers ne sera pas le même, les fichiers eux-mêmes ne pourront pas être les mêmes. C’est ainsi que vous pouvez faire avancer seul.e ou avec d’autres utilisateurices, plusieurs états d’un même travail, avant de fusionner ces versions.</p>
+<p>On va donc créer la branche principale avec la commande :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout <span class="at">-b</span> main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>la commande <code>checkout</code> permet de passer d’une branche à l’autre. Par exemple <code>git checkout fleur</code> permet de passer sur la branche fleur. L’argument -b crée la branche si elle n’existe pas déjà. Chaque fois qu’on crée une branche, on va se situer dans cette nouvelle branche.</p>
+<p>une fois qu’on a créé la branche principale (appelée par convention ‘main’), on va ajouter un fichier à cette branche.</p>
+<p>Ouvrir un éditeur de texte (notepad par exemple)</p>
+<p>dans ce nouveau fichier (recette.md), inscrire les ingrédients de votre recette préférée sous la forme d’une liste à puces</p>
+<pre class="text"><code># ma pizza préférée
+- pâte
+- tomates séchées
+- mozarella
+- lardons
+- champignons</code></pre>
+<p><strong>enregistrer les modifications dans l’{{&lt; glossary index &gt;}}</strong></p>
+<p>Une fois ce fichier enregistré, on va l’ajouter à l’index :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add <span class="op">&lt;</span>nom du fichier<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La commande inverse consiste à retirer de l’index un fichier. Pour cela on va utiliser la commande <code>git rm</code> (<em>rm</em> pour remove). Pour retirer les fichiers et sous-dossiers présents dans un dossier "ajeter", la commande à passer sera :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git rm <span class="at">-rf</span> ajeter/<span class="pp">*</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -rf permet de procéder de manière récursive l'opération dans les sous-sous dossiers, etc.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ainsi si vous avez supprimé un fichier. Vous pouvez le récupérer depuis l’arbre de travail, en revenant à un commit d’avant la suppression. Pour le supprimer définitivement de l’arbre de travail, il faut penser à utiliser <code>git rm</code></p>
+</section>
+<section id="status-log-blame" class="level2">
+<h2 class="anchored" data-anchor-id="status-log-blame">status, log, blame</h2>
+<p>Dans le fichier de sa recette favorite, ajouter un poison (arsenic, strychnine, ritaline, curare, ce que vous voulez)</p>
+<p><code>git status</code> permet de voir les fichiers qui ne sont pas encore dans l’index</p>
+<p>ajouter à l’{{&lt; glossary index add_to_table=true &gt;}}“}, créer un nouveau commit</p>
+<p><code>git log</code>permet de voir l’ensemble (ici 2 seulement) des <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commits</button> Pour avoir un <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> par ligne, compléter la commande avec l’argument –oneline : <code>git log --oneline</code></p>
+<p><code>git blame</code> permet d’avoir accès à davantages d’informations que git log ou de sélectionner un fichier, voir une ou plusieurs lignes du fichier sur lesquelles on souhaite obtenir une information. Comme son nom l’indique, pour un projet collaboratif, il s’agit d’identifier quel contributeur ou contributrice blâmer pour un changement intempestif dans le code source.</p>
+<p>La commande permet de : - sélectionner un ensemble de modifications (par commit, par date, par fichier et de manière combinée) - de savoir qui est l’auteur de la modification et d’obtenir son mail pour avoir des éclaircissements - de savoir quand la modification a été faite. - de savoir en quoi consiste cette modification.</p>
+<p>Par exemple, pour savoir qui est à l’origine des modifications survenues entre la ligne 18 et la ligne 24 du document presentation.md , je peux envoyer la commande suivante :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git blame commandes_base_git.qmd <span class="at">-L</span> 18,24</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pour observer les modifications réalisées sur un document en particulier (mettons le README.md) le 25 février 2026, la commande à passer est :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git blame <span class="at">--since</span><span class="op">=</span><span class="st">"2026-02-25"</span> <span class="at">--until</span><span class="op">=</span><span class="st">"2026-02-25"</span> README.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si on veut stopper l’affichage des lignes dans le terminal on peut “tuer”(kill) le processus dans le terminal avec un Ctrl+Z.</p>
+</section>
+<section id="gérer-le-roll-back-avec-revert" class="level2">
+<h2 class="anchored" data-anchor-id="gérer-le-roll-back-avec-revert">gérer le roll-back avec revert</h2>
+<p>Pris de remords, vous souhaitez revenir à la version précédente, sans le poison.</p>
+<p>Pour revenir à la version précédente, il faut déplacer le curseur HEAD sur le <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> précédent (qui ne contient pas le poison)</p>
+<p>le git log vous indique où actuellement est ce curseur (HEAD = version dans l’espace de travail, par défaut cette version est enregistrée dans le dernier <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button>)</p>
+<p>on pourrait utiliser une fonction qui supprime le dernier <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> pour revenir au précédent</p>
+<p><code>git reset' &lt;commit&gt;</code></p>
+<p>Par contre ça supprime définitivement de l’arbre de travail le fichier modifié dont on ne veut plus. Après tout, une nouvelle avanie subie pourrait nous faire changer d’avis une fois de plus et nous pousser à remettre le poison dans la recette.</p>
+<p>Par ailleurs, quand on travaille à plusieurs, il vaut mieux éviter de supprimer des <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commits</button> (ce que fait l’option <code>git reset</code>). On va donc utiliser <code>git revert</code> qui crée un nouveau <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button>, annulant les changements opérés par un précédent.</p>
+<p>L’opération <code>git revert</code> consiste en trois choses : 1. indiquer l’importance du roll-back (git revert -n HEAD)<br>
+2. Rédiger un message pour expliquer le motif du revert (on peut laisser le message pré-rédigé par défaut)<br>
+3. valider le message et quitter l’éditeur</p>
+<p><code>git revert HEAD</code> : crée un <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> qui reprend l’état du précédent <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> (équivalent à <code>git revert -1 HEAD</code>)</p>
+<p><code>git revert -3 HEAD</code> : crée un <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> qui reprend l’état du 3e <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button></p>
+<p><code>git revert HEAD 606dc1f</code> : retour au <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> 606dc1f</p>
+</section>
+<section id="créer-et-gérer-des-branches" class="level2">
+<h2 class="anchored" data-anchor-id="créer-et-gérer-des-branches">créer et gérer des branches</h2>
+<p>A partir du tronc commun de notre recette, nous allons faire deux variantes : l’une avec de l’ananas (variante qu’on va appeler ‘ananas’), l’autre avec du poivron (variante qu’on va appeler ‘poivron’). Les <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branches</button> de git vont nous permettre de faire bifurquer notre recette : on laisser la variante ananas dans la branche actuelle (la seule pour l’instant, dénommée <em>main</em>) et on va créer une nouvelle branche pour la version ‘poivron’ qu’on va appeler en toute simplicité la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> <em>poivron</em></p>
+<p>Pour créer une <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> poivron, passer la commande :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout <span class="at">-b</span> poivron</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> est créée. C’est dans la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> créée qu’on opère à présent. Pour s’en convaincre, on peut passer <code>git branch</code> on aura comme résultat ‘poivron’. Dans le fichier qui contient la recette ajouter l’ingrédient “poivron”, enregistrer. A présent, on va se remettre sur la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> <em>main</em> en passant la commande :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dans le fichier de la recette, on ne devrait pas voir le poivron, mais on va ajouter l’ananas. enregistrer le fichier.</p>
+</section>
+<section id="fusionner-des-branches" class="level2">
+<h2 class="anchored" data-anchor-id="fusionner-des-branches">fusionner des branches</h2>
+<p><img src="images/git_merge.png" class="img-fluid"></p>
+<p>A présent, on dispose de deux variantes différentes de la meême recette dans deux <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branches</button>.</p>
+<p>Si ces deux variantes sont agréables à notre goût, on peut tenter une fusion (en espérant que le poivron et l’ananas se marient bien) ; pour cela on va fusionner ces deux <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branches</button>.</p>
+<p>la commande <code>git merge</code> permet de fusionner les <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> d’un même <button class="glossary" title="Un repository ou dépôt est un dossier comportant un dispositif de versionage (pour Git, ce dispositif de versionage est majoritairement présent dans le sous-dossier .git)">repository</button>.</p>
+<p>La fonction <code>git merge</code> identifie une <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> principale (par défaut, la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> <em>main</em>, ici celle de l’ananas) et va y ajouter les modifications apportées à la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> mergée (<em>poivron</em>) depuis la bifurcation en créant un nouveau <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button>.</p>
+<p>Si on passe cette commande, on va ainsi pouvoir fusionner ces deux <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branches</button> :</p>
+<pre><code>$ git merge poivron</code></pre>
+<p>Comme les deux <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branches</button>, à la même ligne dans le même fichier, présentent des valeurs différentes, il y a un conflit de versions à résoudre. Automatiquement, dans l’éditeur qui a été défini plus haut comme éditeur par défaut de git, le fichier qui porte le conflit s’ouvre et présente des signes de cette nature (ici capture d’écran de Rstudio) :</p>
+<p><img src="images/conflit_merge.png" class="img-fluid"></p>
+<p>la ligne 18 sert de séparateur entre les deux versions possibles. La première version, celle de la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> <em>main</em> est comprise entre &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD et ===== et celle de la branche poivron entre ===== et &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; poivron. On peut résoudre le conflit en conservant l’un ou l’autre des ingrédients ou les deux. Ici on va conserver les deux. On supprime les balises de conflit et on enregistre le fichier.</p>
+<p>Ensuite pour résoudre complètement le conflit, il faut faire un nouveau <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commit</button> avec la fusion opérée.</p>
+<p>Après quoi, on pourra continuer de passer d’une <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> à l’autre. les modifications de la branche <em>poivron</em> ont été intégrées à la <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branche</button> <em>main</em>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+    commit id: "ingrédient 1"
+    commit id: "ingrédient 2"
+    commit id: "ingrédient 3"
+    branch poivron
+    checkout poivron
+    commit id: "ajout poivron"
+    checkout main
+    commit id: "ajout ananas"
+    merge poivron
+    commit id: "ananas + poivron"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="faisons-le-point" class="level2">
+<h2 class="anchored" data-anchor-id="faisons-le-point">faisons le point</h2>
+<p>On a vu que, soit depuis un terminal, soit en étant intégré à un éditeur, Git vous permet de versionner des fichiers au sens où : - vous pouvez ajouter retrancher des fichiers à un espace de travail - identifier des versions, revenir à des versions précédentes (tous les <button class="glossary" title="L’enregistrement d’un repository ou d’une branche comportant un changement dans un fichier ou un changement dans plusieurs fichiers. Cet enregistrement est inscrit dans l’arbre de travail (l’historique de Git) et dispose d’un message et d’une signature unique (hash)">commits</button> sont conservés) - identifier qui a modifié quoi à quel moment - faire des tests en utilisant le système de <button class="glossary" title="Variante d’un code source développée de manière parallèle à la version par défaut présente dans la branche par défaut (branche le plus souvent appelée ‘main’)">branches</button>, fusionner des versions différentes d’un même fichier.</p>
+<p>En théorie, si le dossier est présent sur un serveur partagé. des collaborateurs.rices pourraient conduire les mêmes opérations en étant connecté.e.s à ce serveur.</p>
+<p>Pour faciliter ce travail de collaboration et ajouter des services à ceux que nous avons déjà listés (essentiellement compris dans le service de contrôle de version), les forges existent et ce sont elles à présent qui vont vous êtes présentées, en particulier deux forges construites avec le logiciel libre gitlab.</p>
+<p>Il est temps maintenant, sans perdre de vue Git de revenir à notre forge.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5. Utiliser Git avec le terminal</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Git dispose d'une interface graphique, {{&lt; glossary git_GUI alpha display="git desktop" &gt;}}. De plus, plusieurs environnements de travail intègrent Git dont {{&lt; glossary VSCodium add_to_table=true &gt;}} et Rstudio. </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>La majorité des utilisateurs et utilisatrices utilisent Git avec leur terminal de commandes. </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>Il existe une grande variété de terminaux qui permettent d'accéder directement au shell de l'ordinateur et de lui envoyer des instructions avec des lignes de commande sans passer par une interface graphique. </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ouvrir le terminal </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Windows 10+ : shift + clic droit, dans le menu, choisir "ouvrir la fenêtre powershell" ou bien entrer "cmd" dans le menu démarrer. </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>GNU/Linux : Ctrl + Alt + T  </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>MacOs : Cliquez sur l’icône Launchpad  dans le Dock, saisissez Terminal dans le champ de recherche, puis cliquez sur Terminal.</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>Dans les manuels, le signe $ en début de ligne indique qu'une commande doit être réalisée dans le terminal de commandes (il ne fait pas partie de la commande à copier/coller)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## copier / coller depuis / vers un terminal</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>Ctrl + C et Ctrl + V ne suffisent pas pour copier ou coller dans un terminal par défaut. Il faut ajouter la touche shift (Ctrl + shift + C ou Ctrl + shift + V) ou ⌘ + shift + C ou V pour MacOs</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>Pour récupérer la commande précédente, utiliser la flèche vers le haut</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## configurer Git</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>Lorsqu'on initie un dépôt (ou {{&lt; glossary repository add_to_table=true&gt;}}) on ouvre un {{&lt; glossary index add_to_table=true&gt;}} dans Git qui au départ va être vide. On va enregistrer dans cet index des fichiers soumis au contrôle de versions ainsi que des opérations réalisées sur ces fichiers.</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>Dans un premier temps, on va utiliser git indépendamment de la forge</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>Lorsqu'on télécharge Git pour Windows, l'installateur nous pose un certain nombre de questions auxquelles on ne saura pas forcément bien répondre la première fois, ce n'est pas grave, on peut toujours changer ces paramètres après sans avoir à tout réinstaller. </span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>Dans la perspective d'une collaboration avec d'autres personnes, il est important de signer les révisions et ajouts qu'on fait avec Git et pour cela il faut une fois pour toutes donner des informations sur soi à l'application : </span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="in">```shell</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">"Damien Belvèze"</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">"damien.belveze@univ-rennes.fr"</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>Une commande git c'est trois choses : </span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>la référence au **programme git** + un **verbe** + une **option** ; </span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>ici on a bien git + config (le verbe) + une option --global</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>**--global** signifie que ce nom et ce mail seront attribués à l'ensemble des révisions réalisées avec Git et pas seulement les révisions liées à un projet en particulier.</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>Git nécessite parfois l'ouverture d'un éditeur pour écrire des messages permettant de donner du sens à certaines actions (une révision ou *commit*, une fusion ou *merge*)</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>L'installateur de Windows demande quel éditeur Git doit utiliser ; pour des raisons de simplicité on peut choisir l'éditeur Notepad qui est par défaut présent dans Windows +10</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>On peut aussi changer d'éditeur avec une ligne de commande : </span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="in">```shell</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> core.editor <span class="st">"notepad -w"</span> ou </span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="in">$ git config --global core.editor "notepad --wait"</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>Dans les commandes ci-dessus on demande à Git d'ouvrir l'éditeur notepad (par défaut sur les ordinateurs Windows) dès qu'il doit ouvrir un éditeur ; c'est préférable au fait de le laisser ouvrir son éditeur de référence qui est Vi si on ne connaît pas Vi et ses raccourcis. </span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## init, add, commit, status</span></span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>**initier un dépôt git**</span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>créer un dossier</span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>initialiser un repository git en entrant la commande suivante dans votre terminal</span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>**créer la branche principale**</span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>Cette opération est superflue tant qu'on ne crée pas plus d'une branche mais elle peut s'avérer utile dans d'autres cas. </span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>Une branche est comme une version du dépôt : elle peut coexister avec une autre branche, c'est à dire une autre version. D'une branche à l'autre, l'état des fichiers ne sera pas le même, les fichiers eux-mêmes ne pourront pas être les mêmes. C'est ainsi que vous pouvez faire avancer seul.e ou avec d'autres utilisateurices, plusieurs états d'un même travail, avant de fusionner ces versions. </span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>On va donc créer la branche principale avec la commande : </span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout <span class="at">-b</span> main</span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>la commande ``checkout`` permet de passer d'une branche à l'autre. Par exemple ``git checkout fleur`` permet de passer sur la branche fleur. L'argument -b crée la branche si elle n'existe pas déjà. </span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>Chaque fois qu'on crée une branche, on va se situer dans cette nouvelle branche. </span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a>une fois qu'on a créé la branche principale (appelée par convention 'main'), on va ajouter un fichier à cette branche. </span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a>Ouvrir un éditeur de texte (notepad par exemple)</span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>dans ce nouveau fichier (recette.md), inscrire les ingrédients de votre recette préférée sous la forme d'une liste à puces</span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="in"># ma pizza préférée</span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a><span class="in">- pâte</span></span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a><span class="in">- tomates séchées</span></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="in">- mozarella</span></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a><span class="in">- lardons</span></span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a><span class="in">- champignons</span></span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>**enregistrer les modifications dans l'{{&lt; glossary index &gt;}}**</span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>Une fois ce fichier enregistré, on va l'ajouter à l'index :</span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add <span class="op">&lt;</span>nom du fichier<span class="op">&gt;</span></span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>La commande inverse consiste à retirer de l'index un fichier. Pour cela on va utiliser la commande ``git rm`` (*rm* pour remove). </span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>Pour retirer les fichiers et sous-dossiers présents dans un dossier "ajeter", la commande à passer sera : </span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git rm <span class="at">-rf</span> ajeter/<span class="pp">*</span></span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a><span class="co"># -rf permet de procéder de manière récursive l'opération dans les sous-sous dossiers, etc.</span></span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>Ainsi si vous avez supprimé un fichier. Vous pouvez le récupérer depuis l'arbre de travail, en revenant à un commit d'avant la suppression. Pour le supprimer définitivement de l'arbre de travail, il faut penser à utiliser ``git rm``</span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## status, log, blame</span></span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>Dans le fichier de sa recette favorite, ajouter un poison (arsenic, strychnine, ritaline, curare, ce que vous voulez)</span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a><span class="in">`git status`</span> permet de voir les fichiers qui ne sont pas encore dans l'index</span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>ajouter à l'{{&lt; glossary index add_to_table=true &gt;}}, créer un nouveau commit</span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a><span class="in">`git log`</span>permet de voir l'ensemble (ici 2 seulement) des {{&lt; glossary commit display="commits" &gt;}} Pour avoir un {{&lt; glossary commit add_to_table=true &gt;}} par ligne, compléter la commande avec l'argument --oneline : <span class="in">`git log --oneline`</span></span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a><span class="in">`git blame`</span> permet d'avoir accès à davantages d'informations que git log ou de sélectionner un fichier, voir une ou plusieurs lignes du fichier sur lesquelles on souhaite obtenir une information. Comme son nom l'indique, pour un projet collaboratif, il s'agit d'identifier quel contributeur ou contributrice blâmer pour un changement intempestif dans le code source. </span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>La commande permet de : </span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>sélectionner un ensemble de modifications (par commit, par date, par fichier et de manière combinée)</span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>de savoir qui est l'auteur de la modification et d'obtenir son mail pour avoir des éclaircissements</span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>de savoir quand la modification a été faite. </span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>de savoir en quoi consiste cette modification. </span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a>Par exemple, pour savoir qui est à l'origine des modifications survenues entre la ligne 18 et la ligne 24 du document presentation.md , je peux envoyer la commande suivante : </span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git blame commandes_base_git.qmd <span class="at">-L</span> 18,24</span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>Pour observer les modifications réalisées sur un document en particulier (mettons le README.md) le 25 février 2026, la commande à passer est : </span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git blame <span class="at">--since</span><span class="op">=</span><span class="st">"2026-02-25"</span> <span class="at">--until</span><span class="op">=</span><span class="st">"2026-02-25"</span> README.md</span>
+<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a>Si on veut stopper l'affichage des lignes dans le terminal on peut "tuer"(kill) le processus dans le terminal avec un Ctrl+Z.</span>
+<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## gérer le roll-back avec revert</span></span>
+<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a>Pris de remords, vous souhaitez revenir à la version précédente, sans le poison.</span>
+<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a>Pour revenir à la version précédente, il faut déplacer le curseur HEAD sur le {{&lt; glossary commit &gt;}} précédent (qui ne contient pas le poison)</span>
+<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a>le git log vous indique où actuellement est ce curseur (HEAD = version dans l'espace de travail, par défaut cette version est enregistrée dans le dernier {{&lt; glossary commit &gt;}})</span>
+<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a>on pourrait utiliser une fonction qui supprime le dernier {{&lt; glossary commit &gt;}} pour revenir au précédent </span>
+<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a>``git reset' <span class="dt">&lt;</span><span class="kw">commit</span><span class="dt">&gt;</span>``</span>
+<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a>Par contre ça supprime définitivement de l'arbre de travail le fichier modifié dont on ne veut plus. Après tout, une nouvelle avanie subie pourrait nous faire changer d'avis une fois de plus et nous pousser à remettre le poison dans la recette.</span>
+<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a>Par ailleurs, quand on travaille à plusieurs, il vaut mieux éviter de supprimer des {{&lt; glossary commit display="commits" &gt;}} (ce que fait l'option <span class="in">`git reset`</span>). On va donc utiliser <span class="in">`git revert`</span> qui crée un nouveau {{&lt; glossary commit &gt;}}, annulant les changements opérés par un précédent.</span>
+<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>L'opération <span class="in">`git revert`</span> consiste en trois choses : </span>
+<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>indiquer l'importance du roll-back (git revert -n HEAD)    </span>
+<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rédiger un message pour expliquer le motif du revert (on peut laisser le message pré-rédigé par défaut)  </span>
+<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>valider le message et quitter l'éditeur    </span>
+<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a><span class="in">`git revert HEAD`</span> : crée un {{&lt; glossary commit &gt;}} qui reprend l'état du précédent {{&lt; glossary commit &gt;}} (équivalent à <span class="in">`git revert -1 HEAD`</span>)</span>
+<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a><span class="in">`git revert -3 HEAD`</span> : crée un {{&lt; glossary commit &gt;}} qui reprend l'état du 3e {{&lt; glossary commit &gt;}}</span>
+<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a><span class="in">`git revert HEAD 606dc1f`</span> : retour au {{&lt; glossary commit &gt;}} 606dc1f</span>
+<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## créer et gérer des branches</span></span>
+<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a>A partir du tronc commun de notre recette, nous allons faire deux variantes : l'une avec de l'ananas (variante qu'on va appeler 'ananas'), l'autre avec du poivron (variante qu'on va appeler 'poivron'). </span>
+<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a>Les {{&lt; glossary branch display="branches" add_to_table=true &gt;}} de git vont nous permettre de faire bifurquer notre recette : on laisser la variante ananas dans la branche actuelle (la seule pour l'instant, dénommée *main*) et on va créer une nouvelle branche pour la version 'poivron' qu'on va appeler en toute simplicité la {{&lt; glossary branch display="branche" &gt;}} *poivron*</span>
+<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a>Pour créer une {{&lt; glossary branch display="branche" &gt;}} poivron, passer la commande : </span>
+<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout <span class="at">-b</span> poivron</span>
+<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a>la {{&lt; glossary branch display="branche" &gt;}} est créée. C'est dans la {{&lt; glossary branch display="branche" &gt;}} créée qu'on opère à présent. Pour s'en convaincre, on peut passer ``git branch`` on aura comme résultat 'poivron'. </span>
+<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a>Dans le fichier qui contient la recette ajouter l'ingrédient "poivron", enregistrer.</span>
+<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a>A présent, on va se remettre sur la {{&lt; glossary branch display="branche" &gt;}} *main* en passant la commande : </span>
+<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main</span>
+<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a>Dans le fichier de la recette, on ne devrait pas voir le poivron, mais on va ajouter l'ananas. enregistrer le fichier. </span>
+<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## fusionner des branches</span></span>
+<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/git_merge.png)</span></span>
+<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a>A présent, on dispose de deux variantes différentes de la meême recette dans deux {{&lt; glossary branch display="branches" &gt;}}. </span>
+<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a>Si ces deux variantes sont agréables à notre goût, on peut tenter une fusion (en espérant que le poivron et l'ananas se marient bien) ; pour cela on va fusionner ces deux {{&lt; glossary branch display="branches" &gt;}}. </span>
+<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a>la commande ``git merge`` permet de fusionner les {{&lt; glossary branch display="branche" &gt;}} d'un même {{&lt; glossary repository &gt;}}. </span>
+<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a>La fonction <span class="in">`git merge`</span> identifie une {{&lt; glossary branch display="branche" &gt;}} principale (par défaut, la {{&lt; glossary branch display="branche" &gt;}} *main*, ici celle de l'ananas) et va y ajouter les modifications apportées à la {{&lt; glossary branch display="branche" &gt;}} mergée (*poivron*) depuis la bifurcation en créant un nouveau {{&lt; glossary commit &gt;}}. </span>
+<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a>Si on passe cette commande, on va ainsi pouvoir fusionner ces deux {{&lt; glossary branch display="branches" &gt;}} : </span>
+<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a><span class="in">$ git merge poivron</span></span>
+<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a>Comme les deux {{&lt; glossary branch display="branches" &gt;}}, à la même ligne dans le même fichier, présentent des valeurs différentes, il y a un conflit de versions à résoudre. </span>
+<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a>Automatiquement, dans l'éditeur qui a été défini plus haut comme éditeur par défaut de git, le fichier qui porte le conflit s'ouvre et présente des signes de cette nature (ici capture d'écran de Rstudio) : </span>
+<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/conflit_merge.png)</span></span>
+<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a>la ligne 18 sert de séparateur entre les deux versions possibles. La première version, celle de la {{&lt; glossary branch display="branche" &gt;}} *main* est comprise entre &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD et ===<span class="al">== et celle de la branche poivron entre ==</span>=== et &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; poivron. </span>
+<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a>On peut résoudre le conflit en conservant l'un ou l'autre des ingrédients ou les deux. Ici on va conserver les deux. On supprime les balises de conflit et on enregistre le fichier. </span>
+<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a>Ensuite pour résoudre complètement le conflit, il faut faire un nouveau {{&lt; glossary commit &gt;}} avec la fusion opérée. </span>
+<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a>Après quoi, on pourra continuer de passer d'une {{&lt; glossary branch display="branche" &gt;}} à l'autre. les modifications de la branche *poivron* ont été intégrées à la {{&lt; glossary branch display="branche" &gt;}} *main*. </span>
+<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a>gitGraph</span>
+<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a>    commit id: <span class="ot">"</span><span class="st">ingrédient 1</span><span class="ot">"</span></span>
+<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a>    commit id: <span class="ot">"</span><span class="st">ingrédient 2</span><span class="ot">"</span></span>
+<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a>    commit id: <span class="ot">"</span><span class="st">ingrédient 3</span><span class="ot">"</span></span>
+<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a>    branch poivron</span>
+<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a>    checkout poivron</span>
+<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a>    commit id: <span class="ot">"</span><span class="st">ajout poivron</span><span class="ot">"</span></span>
+<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a>    checkout main</span>
+<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a>    commit id: <span class="ot">"</span><span class="st">ajout ananas</span><span class="ot">"</span></span>
+<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a>    merge poivron</span>
+<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a>    commit id: <span class="ot">"</span><span class="st">ananas + poivron</span><span class="ot">"</span></span>
+<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a><span class="fu">## faisons le point</span></span>
+<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a>On a vu que, soit depuis un terminal, soit en étant intégré à un éditeur, Git vous permet de versionner des fichiers au sens où : </span>
+<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>vous pouvez ajouter retrancher des fichiers à un espace de travail</span>
+<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>identifier des versions, revenir à des versions précédentes (tous les {{&lt; glossary commit display="commits" &gt;}} sont conservés)</span>
+<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>identifier qui a modifié quoi à quel moment</span>
+<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>faire des tests en utilisant le système de {{&lt; glossary branch display="branches" &gt;}}, fusionner des versions différentes d'un même fichier. </span>
+<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a>En théorie, si le dossier est présent sur un serveur partagé. des collaborateurs.rices pourraient conduire les mêmes opérations en étant connecté.e.s à ce serveur. </span>
+<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a>Pour faciliter ce travail de collaboration et ajouter des services à ceux que nous avons déjà listés (essentiellement compris dans le service de contrôle de version), les forges existent et ce sont elles à présent qui vont vous êtes présentées, en particulier deux forges construites avec le logiciel libre gitlab. </span>
+<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a>Il est temps maintenant, sans perdre de vue Git de revenir à notre forge. </span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
