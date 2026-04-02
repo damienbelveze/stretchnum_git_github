@@ -1,0 +1,148 @@
+[
+  {
+    "objectID": "pizza.html",
+    "href": "pizza.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\npâte\ntomates\nmozarella\nanchois"
+  },
+  {
+    "objectID": "chap2_cle_ssh.html",
+    "href": "chap2_cle_ssh.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\n2. Accèder à la forge avec le protocole ssh\nLa forge est un espace numérique hébergeant un remote c’est à dire un dépôt de fichiers distant. Il y a plusieurs moyens de charger des fichiers sur son ordinateur depuis ce dépôt distant ou bien d’intervenir en écriture sur ce remote ; on distingue en particulier deux protocoles de communication :\n\nhttps : c’est un protocole sécurisé basé sur http qui est le même que celui que nous utilisons pour consulter une page web. une connexion de ce type requiert un nom d’utilisateur et un mot de passe.\nssh : c’est un autre protocole sécurisé basé sur un système de chiffrement (voir plus bas) Lorsqu’on travaille en ssh, on ne doit taper cette phrase de passe qu’au début de la session ; après il n’est plus nécessaire de l’entrer. Cela rend la communication entre le dépôt local et le remote plus fluide, que ce soit à travers le terminal ou à travers un environnement d’édition comme Rstudio ou VS codium.\n\n\nLe protocole choisi par défaut pour travailler avec un remote est spécifié dans le dossier .git : dans le fichier config en effet, une ligne est relative au protocole utilisé par défaut pour accéder en écriture au remote.\nIci on peut voir que le mode de communication prévu est ssh, parce que l’URL commence par git@github.com:user/repo.git et non par https://github.com/user/repo.git Si on souhaite modifier le mode d’accès (passer d’une connexion https à une connexion ssh, par exemple), on ne peut pas changer de lien dans l’éditeur de texte directement, il faut le faire dans le fichier config du dépôt git.\nDans la suite des activités, on va prioriser la connexion ssh parce qu’elle est plus sûre et plus rapide pour le développeur ou la développeuse.\nOn va donc créer une clé ssh.\nLe protocole ssh est un protocole de chiffrement asymétrique, ce qui signifie qu’il faut non pas une clé pour obtenir la connexion mais deux ; le statut de chacune de ces clés est différent :\n\nune clé privée qui ne doit pas quitter votre ordinateur et ne peut être activé que par une phrase de passe (qui ne doit pas quitter votre gestionnaire de mots de passe)\nune clé publique que vous allez associer à votre profil sur github. Il vaut mieux la garder pour vous. J’ai flouté les miennes dans l’image ci-dessous, mais c’est un secret bien moins important que la clé privée.\n\n\nPour générer une paire de clés avec Windows, ouvrir l’invite de commande et taper la commande suivante :\n$ ssh-keygen\n\nSuivre les instructions ; laisser le dossier de destination par défaut. Créer une phrase de passe et la taper une seconde fois.\nAttention : dans un terminal, on ne voit pas les caractères qu’on tape, on ne voit même pas le masque. C’est comme si on tapait dans le vide, mais quand on appuie sur entrée, les caractères ont bien été pris en compte !\nPour info, le dessin en ASCII est utilisé pour vérifier que la clé utilisée ne change pas. Si le dessin change, c’est que la clé à été changée. Il est plus facile de comparer deux dessins de ce genre qu’une suite de caractères absconse.\nLes clés ont bien été créées, mais où sont-elles ?\nWindows : //documents/.ssh\nGNU/Linux : /home//.ssh\nMacOS : /Users//.ssh\nDans ce dossier .ssh, on trouve la (ou les) paire(s) de clés et un fichier known_hosts comportant les noms des serveurs pour lesquels ces clés sont actives :\n\nOuvrir le fichier .pub et copier le contenu :\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAA..........+MuuZnoI7becabYpsfwM1rDVhSyN7 dbelveze@pr030165\nrevenez à la forge (sur votre profil) et collez la clé ssh dans l’endroit prévu à cet effet.\nPour github, une fois qu’on est connectés, c’est à cet endroit : https://github.com/settings/keys (sélectionner settings, puis ssh and gpg keys). Créer une nouvelle clé (new ssh key), lui donner un titre et copier le contenu du fichier .pub dans le champ key.\nA partir de ce moment, votre protocole d’accès par défaut à github sera ssh. Le client qui gère les connexions ssh entre votre machine et les forges que vous utilisez vous demandera à chaque nouvelle session de réactiver la clé privée en entrant votre phrase de passe : sauvegardez bien celle-ci dans un endroit secret (votre cerveau ou un gestionnaire de mots de passe)",
+    "crumbs": [
+      "2. Accèder à la forge avec le protocole ssh"
+    ]
+  },
+  {
+    "objectID": "proposer_amélioration.html",
+    "href": "proposer_amélioration.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "proposer_amélioration.html#faire-un-fork",
+    "href": "proposer_amélioration.html#faire-un-fork",
+    "title": "",
+    "section": "faire un fork",
+    "text": "faire un fork\nLes Apprenant.e.s se constituent en binôme. Chaque membre du binôme va faire une copie, un fork du repository de l’autre. Le but est de faire des modifications à la liste d’ingrédients du binôme et de lui proposer ensuite ces changements.\nPour faire un fork d’un projet, suivre les instructions ci-dessous:\n\nou téléchargez-le fichier pour le lire dans votre propre visionneuse de PDF\n\nRéponse faite à cette demande de fusion :"
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html",
+    "href": "chapt1_commandes_base_git.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#ouvrir-le-terminal",
+    "href": "chapt1_commandes_base_git.html#ouvrir-le-terminal",
+    "title": "",
+    "section": "Ouvrir le terminal",
+    "text": "Ouvrir le terminal\n\nWindows 10+ : shift + clic droit, dans le menu, choisir “ouvrir la fenêtre powershell” ou bien entrer “cmd” dans le menu démarrer.\nGNU/Linux : Ctrl + Alt + T\n\nMacOs : Cliquez sur l’icône Launchpad dans le Dock, saisissez Terminal dans le champ de recherche, puis cliquez sur Terminal.\n\nDans les manuels, le signe $ en début de ligne indique qu’une commande doit être réalisée dans le terminal de commandes (il ne fait pas partie de la commande à copier/coller)\n\n\n\n\n\n\nCautioncopier / coller depuis / vers un terminal\n\n\n\nCtrl + C et Ctrl + V ne suffisent pas pour copier ou coller dans un terminal par défaut. Il faut ajouter la touche shift (Ctrl + shift + C ou Ctrl + shift + V) ou ⌘ + shift + C ou V pour MacOs\nPour récupérer la commande précédente, utiliser la flèche vers le haut"
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#configurer-git",
+    "href": "chapt1_commandes_base_git.html#configurer-git",
+    "title": "",
+    "section": "configurer Git",
+    "text": "configurer Git\nLorsqu’on initie un dépôt (ou [      [                               \n           \n                                       \n                                     \n                    \n           \n            \n                           \n                         \n                           \n          \n                \n                                               \n    \n   \n                \n    \n   \n                   \n                                                                \n          \n                                                    \n                   \n       \n                  \n                \n       ]{.quarto-shortcode__ data-is-shortcode=“1” data-raw=“{{&lt; glossary index add_to_table=true&gt;}} dans Git qui au départ va être vide. On va enregistrer dans cet index des fichiers soumis au contrôle de versions ainsi que des opérations réalisées sur ces fichiers.\nDans un premier temps, on va utiliser git indépendamment de la forge\nLorsqu’on télécharge Git pour Windows, l’installateur nous pose un certain nombre de questions auxquelles on ne saura pas forcément bien répondre la première fois, ce n’est pas grave, on peut toujours changer ces paramètres après sans avoir à tout réinstaller.\nDans la perspective d’une collaboration avec d’autres personnes, il est important de signer les révisions et ajouts qu’on fait avec Git et pour cela il faut une fois pour toutes donner des informations sur soi à l’application :\n$ git config --global user.name \\\"Damien Belvèze\\\"\n$ git config --global user.email \\\"damien.belveze@univ-rennes.fr\\\"\nUne commande git c’est trois choses :\nla référence au programme git + un verbe + une option ;\nici on a bien git + config (le verbe) + une option –global\n–global signifie que ce nom et ce mail seront attribués à l’ensemble des révisions réalisées avec Git et pas seulement les révisions liées à un projet en particulier.\nGit nécessite parfois l’ouverture d’un éditeur pour écrire des messages permettant de donner du sens à certaines actions (une révision ou commit, une fusion ou merge)\nL’installateur de Windows demande quel éditeur Git doit utiliser ; pour des raisons de simplicité on peut choisir l’éditeur Notepad qui est par défaut présent dans Windows +10\nOn peut aussi changer d’éditeur avec une ligne de commande :\n$ git config --global core.editor \\\"notepad -w\\\" ou \n$ git config --global core.editor \\\"notepad --wait\\\"\nDans les commandes ci-dessus on demande à Git d’ouvrir l’éditeur notepad (par défaut sur les ordinateurs Windows) dès qu’il doit ouvrir un éditeur ; c’est préférable au fait de le laisser ouvrir son éditeur de référence qui est Vi si on ne connaît pas Vi et ses raccourcis."
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#init-add-commit-status",
+    "href": "chapt1_commandes_base_git.html#init-add-commit-status",
+    "title": "",
+    "section": "init, add, commit, status",
+    "text": "init, add, commit, status\ninitier un dépôt git\n\ncréer un dossier\ninitialiser un repository git en entrant la commande suivante dans votre terminal\n\n$ git init\ncréer la branche principale\nCette opération est superflue tant qu’on ne crée pas plus d’une branche mais elle peut s’avérer utile dans d’autres cas.\nUne branche est comme une version du dépôt : elle peut coexister avec une autre branche, c’est à dire une autre version. D’une branche à l’autre, l’état des fichiers ne sera pas le même, les fichiers eux-mêmes ne pourront pas être les mêmes. C’est ainsi que vous pouvez faire avancer seul.e ou avec d’autres utilisateurices, plusieurs états d’un même travail, avant de fusionner ces versions.\nOn va donc créer la branche principale avec la commande :\n$ git checkout -b main\nla commande checkout permet de passer d’une branche à l’autre. Par exemple git checkout fleur permet de passer sur la branche fleur. L’argument -b crée la branche si elle n’existe pas déjà. Chaque fois qu’on crée une branche, on va se situer dans cette nouvelle branche.\nune fois qu’on a créé la branche principale (appelée par convention ‘main’), on va ajouter un fichier à cette branche.\nOuvrir un éditeur de texte (notepad par exemple)\ndans ce nouveau fichier (recette.md), inscrire les ingrédients de votre recette préférée sous la forme d’une liste à puces\n# ma pizza préférée\n- pâte\n- tomates séchées\n- mozarella\n- lardons\n- champignons\n**enregistrer les modifications dans l’{{&lt; glossary index &gt;}}“}\n          \n       \n                                      \n                                                          \n   \n                 \n             \n      ]{.quarto-shortcode__ data-is-shortcode=“1” data-raw=“{{&lt; glossary repository add_to_table=true&gt;}}) on ouvre un {{&lt; glossary index add_to_table=true&gt;}} dans Git qui au départ va être vide. On va enregistrer dans cet index des fichiers soumis au contrôle de versions ainsi que des opérations réalisées sur ces fichiers.\nDans un premier temps, on va utiliser git indépendamment de la forge\nLorsqu’on télécharge Git pour Windows, l’installateur nous pose un certain nombre de questions auxquelles on ne saura pas forcément bien répondre la première fois, ce n’est pas grave, on peut toujours changer ces paramètres après sans avoir à tout réinstaller.\nDans la perspective d’une collaboration avec d’autres personnes, il est important de signer les révisions et ajouts qu’on fait avec Git et pour cela il faut une fois pour toutes donner des informations sur soi à l’application :\n$ git config --global user.name \\\"Damien Belvèze\\\"\n$ git config --global user.email \\\"damien.belveze@univ-rennes.fr\\\"\nUne commande git c’est trois choses :\nla référence au programme git + un verbe + une option ;\nici on a bien git + config (le verbe) + une option –global\n–global signifie que ce nom et ce mail seront attribués à l’ensemble des révisions réalisées avec Git et pas seulement les révisions liées à un projet en particulier.\nGit nécessite parfois l’ouverture d’un éditeur pour écrire des messages permettant de donner du sens à certaines actions (une révision ou commit, une fusion ou merge)\nL’installateur de Windows demande quel éditeur Git doit utiliser ; pour des raisons de simplicité on peut choisir l’éditeur Notepad qui est par défaut présent dans Windows +10\nOn peut aussi changer d’éditeur avec une ligne de commande :\n$ git config --global core.editor \\\"notepad -w\\\" ou \n$ git config --global core.editor \\\"notepad --wait\\\"\nDans les commandes ci-dessus on demande à Git d’ouvrir l’éditeur notepad (par défaut sur les ordinateurs Windows) dès qu’il doit ouvrir un éditeur ; c’est préférable au fait de le laisser ouvrir son éditeur de référence qui est Vi si on ne connaît pas Vi et ses raccourcis."
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#init-add-commit-status-1",
+    "href": "chapt1_commandes_base_git.html#init-add-commit-status-1",
+    "title": "",
+    "section": "init, add, commit, status",
+    "text": "init, add, commit, status\ninitier un dépôt git\n\ncréer un dossier\ninitialiser un repository git en entrant la commande suivante dans votre terminal\n\n$ git init\ncréer la branche principale\nCette opération est superflue tant qu’on ne crée pas plus d’une branche mais elle peut s’avérer utile dans d’autres cas.\nUne branche est comme une version du dépôt : elle peut coexister avec une autre branche, c’est à dire une autre version. D’une branche à l’autre, l’état des fichiers ne sera pas le même, les fichiers eux-mêmes ne pourront pas être les mêmes. C’est ainsi que vous pouvez faire avancer seul.e ou avec d’autres utilisateurices, plusieurs états d’un même travail, avant de fusionner ces versions.\nOn va donc créer la branche principale avec la commande :\n$ git checkout -b main\nla commande checkout permet de passer d’une branche à l’autre. Par exemple git checkout fleur permet de passer sur la branche fleur. L’argument -b crée la branche si elle n’existe pas déjà. Chaque fois qu’on crée une branche, on va se situer dans cette nouvelle branche.\nune fois qu’on a créé la branche principale (appelée par convention ‘main’), on va ajouter un fichier à cette branche.\nOuvrir un éditeur de texte (notepad par exemple)\ndans ce nouveau fichier (recette.md), inscrire les ingrédients de votre recette préférée sous la forme d’une liste à puces\n# ma pizza préférée\n- pâte\n- tomates séchées\n- mozarella\n- lardons\n- champignons\nenregistrer les modifications dans l’{{&lt; glossary index &gt;}}\nUne fois ce fichier enregistré, on va l’ajouter à l’index :\n$ git add &lt;nom du fichier&gt;\nLa commande inverse consiste à retirer de l’index un fichier. Pour cela on va utiliser la commande git rm (rm pour remove). Pour retirer les fichiers et sous-dossiers présents dans un dossier \"ajeter\", la commande à passer sera :\n$ git rm -rf ajeter/*\n# -rf permet de procéder de manière récursive l'opération dans les sous-sous dossiers, etc.\nAinsi si vous avez supprimé un fichier. Vous pouvez le récupérer depuis l’arbre de travail, en revenant à un commit d’avant la suppression. Pour le supprimer définitivement de l’arbre de travail, il faut penser à utiliser git rm"
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#status-log-blame",
+    "href": "chapt1_commandes_base_git.html#status-log-blame",
+    "title": "",
+    "section": "status, log, blame",
+    "text": "status, log, blame\nDans le fichier de sa recette favorite, ajouter un poison (arsenic, strychnine, ritaline, curare, ce que vous voulez)\ngit status permet de voir les fichiers qui ne sont pas encore dans l’index\najouter à l’{{&lt; glossary index add_to_table=true &gt;}}“}, créer un nouveau commit\ngit logpermet de voir l’ensemble (ici 2 seulement) des commits Pour avoir un commit par ligne, compléter la commande avec l’argument –oneline : git log --oneline\ngit blame permet d’avoir accès à davantages d’informations que git log ou de sélectionner un fichier, voir une ou plusieurs lignes du fichier sur lesquelles on souhaite obtenir une information. Comme son nom l’indique, pour un projet collaboratif, il s’agit d’identifier quel contributeur ou contributrice blâmer pour un changement intempestif dans le code source.\nLa commande permet de : - sélectionner un ensemble de modifications (par commit, par date, par fichier et de manière combinée) - de savoir qui est l’auteur de la modification et d’obtenir son mail pour avoir des éclaircissements - de savoir quand la modification a été faite. - de savoir en quoi consiste cette modification.\nPar exemple, pour savoir qui est à l’origine des modifications survenues entre la ligne 18 et la ligne 24 du document presentation.md , je peux envoyer la commande suivante :\n$ git blame commandes_base_git.qmd -L 18,24\nPour observer les modifications réalisées sur un document en particulier (mettons le README.md) le 25 février 2026, la commande à passer est :\n$ git blame --since=\"2026-02-25\" --until=\"2026-02-25\" README.md\nSi on veut stopper l’affichage des lignes dans le terminal on peut “tuer”(kill) le processus dans le terminal avec un Ctrl+Z."
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#gérer-le-roll-back-avec-revert",
+    "href": "chapt1_commandes_base_git.html#gérer-le-roll-back-avec-revert",
+    "title": "",
+    "section": "gérer le roll-back avec revert",
+    "text": "gérer le roll-back avec revert\nPris de remords, vous souhaitez revenir à la version précédente, sans le poison.\nPour revenir à la version précédente, il faut déplacer le curseur HEAD sur le commit précédent (qui ne contient pas le poison)\nle git log vous indique où actuellement est ce curseur (HEAD = version dans l’espace de travail, par défaut cette version est enregistrée dans le dernier commit)\non pourrait utiliser une fonction qui supprime le dernier commit pour revenir au précédent\ngit reset' &lt;commit&gt;\nPar contre ça supprime définitivement de l’arbre de travail le fichier modifié dont on ne veut plus. Après tout, une nouvelle avanie subie pourrait nous faire changer d’avis une fois de plus et nous pousser à remettre le poison dans la recette.\nPar ailleurs, quand on travaille à plusieurs, il vaut mieux éviter de supprimer des commits (ce que fait l’option git reset). On va donc utiliser git revert qui crée un nouveau commit, annulant les changements opérés par un précédent.\nL’opération git revert consiste en trois choses : 1. indiquer l’importance du roll-back (git revert -n HEAD)\n2. Rédiger un message pour expliquer le motif du revert (on peut laisser le message pré-rédigé par défaut)\n3. valider le message et quitter l’éditeur\ngit revert HEAD : crée un commit qui reprend l’état du précédent commit (équivalent à git revert -1 HEAD)\ngit revert -3 HEAD : crée un commit qui reprend l’état du 3e commit\ngit revert HEAD 606dc1f : retour au commit 606dc1f"
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#créer-et-gérer-des-branches",
+    "href": "chapt1_commandes_base_git.html#créer-et-gérer-des-branches",
+    "title": "",
+    "section": "créer et gérer des branches",
+    "text": "créer et gérer des branches\nA partir du tronc commun de notre recette, nous allons faire deux variantes : l’une avec de l’ananas (variante qu’on va appeler ‘ananas’), l’autre avec du poivron (variante qu’on va appeler ‘poivron’). Les branches de git vont nous permettre de faire bifurquer notre recette : on laisser la variante ananas dans la branche actuelle (la seule pour l’instant, dénommée main) et on va créer une nouvelle branche pour la version ‘poivron’ qu’on va appeler en toute simplicité la branche poivron\nPour créer une branche poivron, passer la commande :\n$ git checkout -b poivron\nla branche est créée. C’est dans la branche créée qu’on opère à présent. Pour s’en convaincre, on peut passer git branch on aura comme résultat ‘poivron’. Dans le fichier qui contient la recette ajouter l’ingrédient “poivron”, enregistrer. A présent, on va se remettre sur la branche main en passant la commande :\n$ git checkout main\nDans le fichier de la recette, on ne devrait pas voir le poivron, mais on va ajouter l’ananas. enregistrer le fichier."
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#fusionner-des-branches",
+    "href": "chapt1_commandes_base_git.html#fusionner-des-branches",
+    "title": "",
+    "section": "fusionner des branches",
+    "text": "fusionner des branches\n\nA présent, on dispose de deux variantes différentes de la meême recette dans deux branches.\nSi ces deux variantes sont agréables à notre goût, on peut tenter une fusion (en espérant que le poivron et l’ananas se marient bien) ; pour cela on va fusionner ces deux branches.\nla commande git merge permet de fusionner les branche d’un même repository.\nLa fonction git merge identifie une branche principale (par défaut, la branche main, ici celle de l’ananas) et va y ajouter les modifications apportées à la branche mergée (poivron) depuis la bifurcation en créant un nouveau commit.\nSi on passe cette commande, on va ainsi pouvoir fusionner ces deux branches :\n$ git merge poivron\nComme les deux branches, à la même ligne dans le même fichier, présentent des valeurs différentes, il y a un conflit de versions à résoudre. Automatiquement, dans l’éditeur qui a été défini plus haut comme éditeur par défaut de git, le fichier qui porte le conflit s’ouvre et présente des signes de cette nature (ici capture d’écran de Rstudio) :\n\nla ligne 18 sert de séparateur entre les deux versions possibles. La première version, celle de la branche main est comprise entre &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD et ===== et celle de la branche poivron entre ===== et &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; poivron. On peut résoudre le conflit en conservant l’un ou l’autre des ingrédients ou les deux. Ici on va conserver les deux. On supprime les balises de conflit et on enregistre le fichier.\nEnsuite pour résoudre complètement le conflit, il faut faire un nouveau commit avec la fusion opérée.\nAprès quoi, on pourra continuer de passer d’une branche à l’autre. les modifications de la branche poivron ont été intégrées à la branche main.\n\n\n\n\n\ngitGraph\n    commit id: \"ingrédient 1\"\n    commit id: \"ingrédient 2\"\n    commit id: \"ingrédient 3\"\n    branch poivron\n    checkout poivron\n    commit id: \"ajout poivron\"\n    checkout main\n    commit id: \"ajout ananas\"\n    merge poivron\n    commit id: \"ananas + poivron\""
+  },
+  {
+    "objectID": "chapt1_commandes_base_git.html#faisons-le-point",
+    "href": "chapt1_commandes_base_git.html#faisons-le-point",
+    "title": "",
+    "section": "faisons le point",
+    "text": "faisons le point\nOn a vu que, soit depuis un terminal, soit en étant intégré à un éditeur, Git vous permet de versionner des fichiers au sens où : - vous pouvez ajouter retrancher des fichiers à un espace de travail - identifier des versions, revenir à des versions précédentes (tous les commits sont conservés) - identifier qui a modifié quoi à quel moment - faire des tests en utilisant le système de branches, fusionner des versions différentes d’un même fichier.\nEn théorie, si le dossier est présent sur un serveur partagé. des collaborateurs.rices pourraient conduire les mêmes opérations en étant connecté.e.s à ce serveur.\nPour faciliter ce travail de collaboration et ajouter des services à ceux que nous avons déjà listés (essentiellement compris dans le service de contrôle de version), les forges existent et ce sont elles à présent qui vont vous êtes présentées, en particulier deux forges construites avec le logiciel libre gitlab.\nIl est temps maintenant, sans perdre de vue Git de revenir à notre forge."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "découvrir Git et la forge Gitlab",
+    "section": "",
+    "text": "Plan de métro ou gestion confuse d’un projet git ?\n\n\nCette formation de 2 heures est destinée aux étudiants et personnels de bibliothèque qui participent au stretching numérique\nObjectifs de la séance :\n\nutiliser un terminal de commandes\nmaîtriser le contrôle de version en local\n\nutiliser des éditeurs de texte basiques\nutiliser la forge Github\nfaire le lien entre la forge et l’outil de contrôle de version git\npublier une page web depuis Github",
+    "crumbs": [
+      "découvrir Git et la forge Gitlab"
+    ]
+  },
+  {
+    "objectID": "far.html",
+    "href": "far.html",
+    "title": "recette du far aux pruneaux",
+    "section": "",
+    "text": "250 g de farine\n400 g de pruneaux\n250 g de sucre\n4 gros oeufs\n1 litre de lait cru entier\n30 g de beurre demi sel\n1 pincée de sel\n1 bouchon de rhum\net une pincée de cannelle\net une pincée de sel"
+  },
+  {
+    "objectID": "chapt3_envoi_vers_forge.html",
+    "href": "chapt3_envoi_vers_forge.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "chapt3_envoi_vers_forge.html#créer-un-nouveau-dépôt",
+    "href": "chapt3_envoi_vers_forge.html#créer-un-nouveau-dépôt",
+    "title": "",
+    "section": "1. Créer un nouveau dépôt",
+    "text": "1. Créer un nouveau dépôt\nAller sur github, authentifiez-vous. Cliquez sur le bouton vert New Ajouter un nom au repo(sitory)\n apporter une description (c’est surtout pour soi) On n’a pas besoin d’un repo privé, laissez-le en public. Pour des raisons de clarté (pour autrui), il est nécessaire d’avoir un fichier README, mais on le générera une autre fois, laisser comme ça (sans README généré au moment de la création) Pareil pour le fichier .gitignore ; le fichier .gitignore est la liste (actuellement vide) de tous les fichiers qui potentiellement doivent rester en local et ne doivent pas être envoyés vers la forge. Pareil pour la licence, c’est important, mais on la rajoutera plus tard."
+  },
+  {
+    "objectID": "chapt3_envoi_vers_forge.html#charger-des-fichiers-vers-un-remote-dans-une-forge",
+    "href": "chapt3_envoi_vers_forge.html#charger-des-fichiers-vers-un-remote-dans-une-forge",
+    "title": "",
+    "section": "2. Charger des fichiers vers un remote dans une forge",
+    "text": "2. Charger des fichiers vers un remote dans une forge\nOn va connecter le repo en ligne qu’on vient de créer (le remote) au repo en local (notre dossier Git) Pour faire ce lien, depuis le terminal, entrer la commande suivante :\n$ git remote add origin git@github.com:damienbelveze/pizza.git\nSi on a déjà un commit prêt dans son dossier local, il est prêt à être envoyé vers la forge. origin fait référence au repo git (voir commande ci-dessus)\ngit push -u origin main # pousse les documents vers la branche main du remote\néventuellement la première fois qu’on fait un commit en direction du repo, on est amené à entrer cette commande supplémentaire. C’est le cas si le dossier local contient plusieurs branches.\n$ git push --set-upstream origin main\nle lien entre le répertoire local et la forge va s’établir.\nRafraîchir la page d’accueil du répertoire sur la forge : les fichiers créés en local vont apparaître dans la page d’accueil du projet."
+  },
+  {
+    "objectID": "chapt3_envoi_vers_forge.html#utiliser-la-forge-pour-éditer-du-texte",
+    "href": "chapt3_envoi_vers_forge.html#utiliser-la-forge-pour-éditer-du-texte",
+    "title": "",
+    "section": "3. utiliser la forge pour éditer du texte",
+    "text": "3. utiliser la forge pour éditer du texte\nOn va maintenant ajouter un README au dépôt cliquer sur le bouton “add README”. entrer une phrase.\nRevenir sur le répertoire local. Pour récupérer depuis le remote le README qu’on vient d’écrire, on va faire un pull :\n$ git pull"
+  }
+]
