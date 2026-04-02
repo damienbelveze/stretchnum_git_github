@@ -1,6 +1,6 @@
 - pâte
 - tomates
 - mozarella
-- tofu
+- anchois
 
 

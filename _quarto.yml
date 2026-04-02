@@ -8,13 +8,9 @@ website:
     search: true
     contents:
       - index.qmd
-      - chap1_visite_rapide_gitlab.qmd
-      - chap2_presentation_generale_git.qmd
-      - chap3_git_vscodium.qmd
-      - chap4_git_rstudio.qmd
-      - chap5_commandes_base_git.qmd
-      - chap6_proposer_amélioration.qmd
-      - chap7_publier_page.qmd
+      - chap1_commandes_base_git.qmd
+      - chap2_cle_ssh.qmd
+      - chap3_envoi_vers_forge.qmd
 
 format:
   html:

@@ -7,10 +7,6 @@ author:
       email: damien.belveze@univ-rennes.fr
       affiliation: 
         - name: Université de Rennes
-    - name: Kilian Heutte
-      email: kilian.heutte@univ-rennes2.fr
-      affiliation: 
-        - name: Université Rennes 2
 output: 
   html:
     from: markdown+emoji
@@ -26,15 +22,17 @@ bibliography: biblio/biblio.bib
 csl: biblio/nature.csl
 ---
 
-![Plan de métro ou gestion confuse d'un projet git ?](images/plan_metro.jpg)
+![Plan de métro ou gestion confuse d'un projet git ?](images/git_github.jpg)
 
-Cette formation de 3 heures est destinée aux doctorant.e.s du Collège doctoral de Bretagne
+Cette formation de 2 heures est destinée aux étudiants et personnels de bibliothèque qui participent au *stretching numérique*
 
 Objectifs de la séance : 
 
-- Connaître le rôle de git et gitlab dans l'écosystème de la recherche et de la production de code source de recherche  
-- utiliser git pour versionner un texte ou un code source  
-- connaître les principales fonctionnalités des forges  
-- utiliser une forge pour collaborer avec d'autres chercheurs et chercheuses  
+- utiliser un terminal de commandes
+- maîtriser le contrôle de version en local  
+- utiliser des éditeurs de texte basiques 
+- utiliser la forge Github 
+- faire le lien entre la forge et l'outil de contrôle de version git
+- publier une page web depuis Github
 
 
